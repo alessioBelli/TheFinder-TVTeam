@@ -3,12 +3,12 @@ from flask import Flask, request, render_template, send_from_directory
 from flask import Flask, session, request, redirect, url_for
 import shutil
 import comparazione
-import createAndSaveHisto
+import saveHisto
 import query
 import string
 import random
 import json
-import estrai_da_database
+import save_feature
 
 __author__ = 'io'
 
@@ -140,8 +140,8 @@ def scriviFile(nomeFile, testo):
     file1.close()
 
 if __name__ == "__main__":
-    createAndSaveHisto.saveHisto()
-    #estrai_da_database.creazioneFeature()
+    saveHisto.saveHisto()
+    #save_feature.creazioneFeature()
     app.secret_key = 'super secret key'
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
     app.run(port=4555, debug=True)
