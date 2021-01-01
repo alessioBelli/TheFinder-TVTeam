@@ -100,6 +100,8 @@ def send_image(filename):
 
 @app.route('/complete')
 def complete():
+    if session.get("user") == None:
+        return render_template('404.html'), 404
     stri = "./similiJson/" + session.get("user")+".json"
     simili = open(stri,"r")
     immagini_simili = simili.read()
