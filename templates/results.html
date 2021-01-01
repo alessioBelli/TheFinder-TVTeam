@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Complete</title>
+        <title>Risultati</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -38,13 +38,13 @@
                 </a>
                 <h4><b>THE FINDER  </b><i class='fas fa-search w3-spin'></i></h4><br>
                 <b>L'immagine che hai caricato:</b>
-                <img src="{{url_for('send_image_complete', filename=input_image)}}" style="width:100%;" class="w3-round w3-animate-left">
+                <img src="{{url_for('send_image_results', filename=input_image)}}" style="width:100%;" class="w3-round w3-animate-left">
                 
             </div>
             <div class="w3-bar-block">
                 <a href="/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-animate-left"><i class="fa fa-th-large fa-fw w3-margin-right"></i>HOME</a> 
                 <a href="/upload" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-animate-left"><i class="fas fa-upload fa-fw w3-margin-right"></i>UPLOAD</a>
-                <a  onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal w3-animate-left"><i class="fas fa-list-alt fa-fw w3-margin-right"></i>RESULTS</a>
+                <a onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal w3-animate-left"><i class="fas fa-list-alt fa-fw w3-margin-right"></i>RESULTS</a>
                 <a href="/gallery" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-animate-left"><i class="fas fa-images fa-fw w3-margin-right"></i>GALLERIA</a>
             </div>
         </nav>
@@ -70,7 +70,7 @@
             <div class="w3-third w3-container w3-margin-bottom">
             
                 
-                <img src="{{url_for('send_image_complete', filename=image_name['name'])}}" alt="Norway" style="width:100%; height: 220px;" class="w3-hover-opacity w3-animate-right" onclick="onClick(this)">
+                <img src="{{url_for('send_image_results', filename=image_name['name'])}}" alt="Norway" style="width:100%; height: 220px;" class="w3-hover-opacity w3-animate-right" onclick="onClick(this)">
                 
                 <div class="w3-container w3-white">
                     <p><b>{{image_name['name']}}</b></p>

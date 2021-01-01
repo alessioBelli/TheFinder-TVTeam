@@ -68,12 +68,12 @@ def upload():
         print ("Save it to:", destination)
         upload.save(destination)
         
-    dati = elaborazioneImmagini()
-
-
+    
+    
+    #
     # return send_from_directory("images", filename, as_attachment=True)
     # return render_template("upload.html", image_name=filename)
-    return render_template("complete.html", input_image=session.get("lastImage"), dati=dati)
+    return redirect(url_for("results"))
 
 @app.after_request
 def add_header(r):
@@ -111,16 +111,17 @@ def elaborazioneImmagini():
     return dati
 
 
-@app.route('/complete')
-def complete():
+@app.route('/results')
+def results():
     
     if session.get("user") == None:
         return render_template('404.html'), 404
-    
-    return render_template("complete.html")
+    dati = elaborazioneImmagini()
 
-@app.route('/complete/<filename>')
-def send_image_complete(filename):
+    return render_template("results.html",input_image=session.get("lastImage"), dati=dati)
+
+@app.route('/results/<filename>')
+def send_image_results(filename):
     print(filename)
     if filename in session.get("lastImage"):
         source = "images"
