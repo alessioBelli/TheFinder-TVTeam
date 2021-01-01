@@ -40,7 +40,6 @@ def upload():
         print("Nuovo Utente, creazione sessione")
         session["user"] = id_generator(10)
     print(session.get("user"))
-    messaggio = ""
     target = os.path.join(APP_ROOT, 'images/')
     print(target)
     if os.path.isdir("./images") == True:
@@ -49,31 +48,32 @@ def upload():
         os.mkdir(target)
     else:
         print("Couldn't create upload directory: {}".format(target))
-        messaggio = "Caricamento del file non riuscito"
     print(request.files.getlist("file"))
+
     for upload in request.files.getlist("file"):
         listImmagini = os.listdir("./images")
         print(upload)
         print("{} is the file name".format(upload.filename))
         filename = upload.filename
-        messaggio = "Il file " + filename + " è stato caricato correttamente"
         estensione = filename[-3:]
         print(session.get("user") +"."+ estensione)
         filename = session.get("user") +"."+ estensione
         if filename in listImmagini:
             os.remove("./images/"+filename)
+        
+        session["quantity"] = request.form.get('quantity')
         session["lastImage"] = filename
         destination = "/".join([target, filename])
         print ("Accept incoming file:", filename)
         print ("Save it to:", destination)
         upload.save(destination)
         
-    elabora(session.get("lastImage"))
+    dati = elaborazioneImmagini()
 
 
     # return send_from_directory("images", filename, as_attachment=True)
     # return render_template("upload.html", image_name=filename)
-    return render_template("upload.html", messaggio=messaggio)
+    return render_template("complete.html", input_image=session.get("lastImage"), dati=dati)
 
 @app.after_request
 def add_header(r):
@@ -98,24 +98,26 @@ def get_gallery():
 def send_image(filename):
     return send_from_directory("gallery", filename)
 
-@app.route('/complete')
-def complete():
-    if session.get("user") == None:
-        return render_template('404.html'), 404
-    stri = "./similiJson/" + session.get("user")+".json"
-    simili = open(stri,"r")
-    immagini_simili = simili.read()
-    simili.close()
-    deti=""
-    if(immagini_simili != ""):
-        dati = json.loads(immagini_simili)
+
+def elaborazioneImmagini():
+    #elabora(session.get("lastImage"),session.get("quantity"))
+    filenames = comparazione.compara(session.get("lastImage"),session.get("quantity"))
+   
+    dati = json.loads(filenames)
 
     for filename in dati:
         filename["percentage"] = '%.1f'%(float(filename["percentage"]))
     
-    input = session.get("lastImage")
+    return dati
+
+
+@app.route('/complete')
+def complete():
     
-    return render_template("complete.html", input_image=input, dati=dati)
+    if session.get("user") == None:
+        return render_template('404.html'), 404
+    
+    return render_template("complete.html")
 
 @app.route('/complete/<filename>')
 def send_image_complete(filename):
@@ -126,27 +128,10 @@ def send_image_complete(filename):
         source = "gallery"
     return send_from_directory(source, filename)
 
-def elabora():
-    #Elaborazione immagine caricata e confronto con gallery
-    return True
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-
-def elabora(filename):
-    filenames = comparazione.compara(session.get("lastImage"))
-
-    if os.path.isdir("./similiJson") == True:
-        print("Directory già presente")
-    else:
-        os.mkdir("./similiJson")
-    listFile = os.listdir("./similiJson")
-    stri = session.get("user")+".json"
-    if stri in listFile:
-        os.remove("./similiJson/"+stri)
-    scriviFile("./similiJson/"+stri,filenames)
-    
 
 def scriviFile(nomeFile, testo):
     file1 = open(nomeFile, "w")

@@ -16,7 +16,7 @@ import query
 def takeSecond(elem):
     return elem[1]
 
-def compara(input):
+def compara(input,num):
     fsRead= cv2.FileStorage ("histograms.txt", cv2.FileStorage_READ )
 
 
@@ -62,7 +62,7 @@ def compara(input):
     filenames = "["
     for elem in res:
         count2+=1 
-        if(count2 == 6):
+        if(count2 == int(num)):
             filenames = filenames + '{ "name": "' + f"{elem[0]}.jpg" + '", "percentage": ' + ("%.3f" % (elem[1])) + '}'
             break
         else:

@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <title>Upload</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <head>
+        <title>Upload</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
-    <style>
-        body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-    </style>
-     
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+        
+  
+        <style>
+            body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+        </style>
+    </head>
     <body class="w3-light-grey w3-content" style="max-width:1600px">
         <!-- Sidebar/menu -->
         <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -43,32 +46,17 @@
             <header id="portfolio">
                 <div class="w3-container" style="text-align:center; padding-top: 10px;">
                     <h1 class="w3-animate-right"><b>Carica la tua immagine</b></h1>
+                    <div class="alert alert-info w3-animate-right" >
+                        <strong>Carica un'immagine .jpg o .png</strong><br>
+                        <strong>Una volta cliccato su upload, aspetta qualche secondo e vedrai i risultati</strong>
+                    </div>
+
                     <div class="w3-section w3-bottombar w3-padding-4">
                     </div>
-                    <div class="w3-animate-zoom">
-                        {% if messaggio == "" %}
-
-                        {% elif messaggio != "Caricamento del file non riuscito" %}
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong class="messaggio">{{messaggio}}</strong><br>
-                            <strong>Clicca <b>Search</b> per visualizzare le immagini simili!</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        {% endif %}
-
-                        {% if messaggio == "Caricamento del file non riuscito" %}
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong class="messaggio">{{messaggio}}</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>   
-                        </div>
-                        {% else %}
+                    
                         
-                        {% endif %}
-                    </div> 
+                        
+                    
                 </div>
             </header>
             <div class="w3-animate-right">
@@ -80,9 +68,13 @@
                             <label class="custom-file-label" for="file-picker">Choose file</label>
                             <div class="custom-file" id="nomeFile" style="display: none;"></div>
                         </div>
+                        <div class="">
+                            <label class="form-label" for="typeNumber">Quante immagini simili vuoi visualizzare?</label>
+                            <input type="number" id="typeNumber" name="quantity" min="1" max="10" value=5 class="form-control" style="width: 30%;"/>
+                        </div>
                         <hr>
                         <button class="btn btn-primary submit" type="submit">Upload</button>
-                        <button class="btn btn-primary search" type="button" onclick="search()">Search</button>
+                        
                         <div class="custom-file" id="msg" style="display: none;"></div>
                     </form>
                 </div>   
@@ -91,12 +83,7 @@
         </div>
 
         <script>
-            $( document ).ready(function() {
-                if($('.messaggio').text() == ""){
-                    $('.alert').css("display","none");
-                    $('.search').prop("disabled",true);
-                }
-            });
+            
             // Script to open and close sidebar
             function w3_open() {
                 document.getElementById("mySidebar").style.display = "block";
@@ -144,9 +131,7 @@
                 }
             })
 
-        function search(){
-            location.href="/complete";
-        }
+        
         </script>
     </body>
 </html>
