@@ -16,9 +16,8 @@ import query
 def takeSecond(elem):
     return elem[1]
 
-def compara(input,num):
+def istogrammi(input):
     fsRead= cv2.FileStorage ("histograms.txt", cv2.FileStorage_READ )
-
 
     #calcola istogramma immagine input
     image=cv2.imread(f"images/"+input)
@@ -37,20 +36,28 @@ def compara(input,num):
 
 
     newdict2={k:v for k, v in sorted(results.items(),reverse=True,key=lambda key:key[1])}
-    n=1000
+    list_image = os.listdir("./gallery")
+    n = len(list_image)
     first_n = list(newdict2.items())[:n]
-    print (first_n)
 
+    return first_n
+
+        
+
+def compara(input,num):
+
+    first_n = istogrammi(input)
     ids,new = query.compara(input)
-    
+
+    list_image = os.listdir("./gallery")
+    n = len(list_image)
+
     res = []
     for x in range(n):
-        #print(first_n[x][0])
+
         for i in ids:
             if str(i) == first_n[x][0]:
-                #print("Img:", i)
-                #print("Hist:",first_n[x][1])
-                #print("Deep:",new[i])
+                
                 media = ((first_n[x][1]*100)*0.2 + (new[i])*0.8) / 1
                 res.append((i,media))
     print(res)
@@ -70,20 +77,8 @@ def compara(input,num):
 
     filenames = filenames + "]"
 
-    '''
-    # loop over the results
-    count2=0
-    filenames = "["
-    for (i,k) in first_n:
-        count2+=1 
-        if(count2 == n):
-            filenames = filenames + '{ "name": "' + f"{i}.jpg" + '", "percentage": ' + ("%.3f" % (k)) + '}'
-        else:
-            filenames = filenames + '{ "name": "' + f"{i}.jpg" + '", "percentage": ' + ("%.3f" % (k)) + '},'
-
-    filenames = filenames + "]"
-    '''
-    #filenames = '[{ "name": "0.jpg", "percentage": 43},{ "name": "1.jpg", "percentage": 12},{ "name": "2.jpg", "percentage": 90},{ "name": "134.jpg", "percentage": 56},{ "name": "4.jpg", "percentage": 34}]'
+    
     return filenames
 
-        
+
+    
