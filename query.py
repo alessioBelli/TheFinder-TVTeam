@@ -20,39 +20,40 @@ def compara(input):
     image_names = sorted_alphanumeric(os.listdir("gallery/"))
     print(image_names)
 
+    #recupero le feature dai file e le appendo a una lista
     for filename in image_names:
         nomeFile = os.path.splitext(filename)[0]
         features.append(np.load(f"features/{nomeFile}.npy"))
 
+    #rendo la lista un Numpy Array    
     features=np.array(features)
-
-    # Insert the image query
+    #carico l'immagine di query
     img = Image.open("images/"+input)
-    # Extract its features
+    #estraggo le features con il metodo extract della classe esterna FeatureExtractor2
     query = fe.extract(img)
-
-    # Calculate the similarity (distance) between images
-    dists = np.linalg.norm(features - query, axis=1)     #formula per calcolare la distanza euclidea
-    # Extract 10 images that have lowest distance
-    ids = np.argsort(dists)[:1000]
+    #calcolo la distanza euclidea fra la feature della query e le 1000 salvate
+    dists = np.linalg.norm(features - query, axis=1)   #np.linalg.norm formula per distanza eucl
+    ids = np.argsort(dists)   #argsort è funzione che ordina in ordine crescente e ritorna gli indici(corrispondenti all'id dell'immagine)
 
 
 
     #creo nuovo array per definire punteggio da 0 a 100
-
-    arr2=np.sort(dists)
-    oldMax=arr2[len(arr2)-1]    
-    if(arr2[0]>0.6):                      #se sono particolarmente simili la distanza sarà a grandi linee inferiore di 0,6
+    #-------------------------------------------------------------------
+    arr2=np.sort(dists)                    #in arr2 ho i valori ordinati in ordine crescente
+    print(arr2)
+    oldMax=arr2[len(arr2)-1]              #il vecchio massimo è l'ultimo elemento dell'arr2(che era stato ordinato)    
+    if(arr2[0]>0.6):                      #se sono particolarmente simili la distanza sarà a grandi linee inferiore di 0,4
         oldMin=0.6                        #per aumentare i punteggi lavorare su questo(aumentarlo)
     else:
-        oldMin=arr2[0]                    #per non avere percentuali che superino il 100% se la distanza minima è minore di 0.6
-    newMax=100
-    newMin=0
+        oldMin=arr2[0]                    #per non avere percentuali che superino il 100% se la distanza minima è minore di 0.4
+    newMax=100                            #nuovo punteggio massimo
+    newMin=0                              #nuovo minimo
 
-    OldRange = (oldMax-oldMin)
-    NewRange = (newMax-newMin)  
+    OldRange = (oldMax-oldMin)            #vecchio range
+    NewRange = (newMax-newMin)            #nuovo range
     new=[]
     for n in dists:
-        new.append(100-(((n - oldMin) * NewRange) / OldRange) + newMin)
+        new.append(100-(((n - oldMin) * NewRange) / OldRange) + newMin) #formula per passare da vecchio range a nuovo range(100- per invertire l'ordine (sennò avrei che i più simili sono quelli più vicini allo 0)                                                                  
+    #--------------------------------------------------------------------
 
     return ids, new
