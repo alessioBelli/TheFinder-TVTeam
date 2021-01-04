@@ -1,10 +1,5 @@
-import cv2
-from matplotlib import pyplot as plt
 # import the necessary packages
-import matplotlib.pyplot as plt
-import numpy as np
-import argparse
-import glob
+import math
 import cv2
 import os
 import os.path
