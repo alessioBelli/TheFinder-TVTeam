@@ -1,28 +1,30 @@
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.models import Model
+from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
-from PIL import Image
 
 # See https://keras.io/api/applications/ for details
 
 class FeatureExtractor:
-    def __init__(self):
-        base_model = VGG16(weights='imagenet')
-        self.model = Model(inputs=base_model.input, outputs=base_model.get_layer('fc1').output)
+    def __init__(self):                              #costruttore per la classe
+        base_model = ResNet50(weights='imagenet')    #il modello base con pesi pre-trained di ImageNet 
+        self.model = Model(inputs=base_model.input, outputs=base_model.get_layer('avg_pool').output) #non mi interessa il modello completo ma utilizzo solo il layer avg_pool
+        #for i, layer in enumerate(base_model.layers):
+        #    print (i, layer.name, layer.output_shape)
+        
 
-    def extract(self, img):
-        """
-        Extract a deep feature from an input image
-        Args:
-            img: from PIL.Image.open(path) or tensorflow.keras.preprocessing.image.load_img(path)
-        Returns:
-            feature (np.ndarray): deep feature with the shape=(4096, )
-        """
-        img = img.resize((224, 224))  # VGG must take a 224x224 img as an input
-        img = img.convert('RGB')  # Make sure img is color
-        x = image.img_to_array(img)  # To np.array. Height x Width x Channel. dtype=float32
-        x = np.expand_dims(x, axis=0)  # (H, W, C)->(1, H, W, C), where the first elem is the number of img
-        x = preprocess_input(x)  # Subtracting avg values for each pixel
-        feature = self.model.predict(x)[0]  # (1, 4096) -> (4096, )
-        return feature / np.linalg.norm(feature)  # Normalize
+    def extract(self, img):          
+        #estraggo una deep feature dall'immagine in ingresso
+        #Args:
+        #    img: from PIL.Image.open(path)
+        #Returns:
+        #    feature (np.ndarray): deep feature with the shape=(2048, )
+        
+        img = img.resize((224, 224))  # ResNet in ingresso deve avere 224x224
+        img = img.convert('RGB')      # Mi assicuro che sia in RGB (ResNet opera sui 3 canali)
+        x = image.img_to_array(img)   # rendo l'immagine un np.array. Dimensioni: Height x Width x Channel. dtype=float32
+        x = np.expand_dims(x, axis=0)  # (H, W, C)->(1, H, W, C), il primo elemento sarà il numero dell'immagine
+        x = preprocess_input(x)        # pre-processing (Subtracting avg values for each pixel)
+        feature = self.model.predict(x)[0]    #considero solo la prima dimensione, ossia passo da (1, 2048) -> (2048, )
+        #print(feature.shape)
+        return feature / np.linalg.norm(feature)  # Normalizzo il risultato
