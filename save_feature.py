@@ -21,6 +21,9 @@ def creazioneFeature():
         if cont % 10 == 0:
             sys.stdout.write('\r' + "Le immagini elaborate sono attualmente : " + str(cont) + "/" + str(len(image_names)))
             sys.stdout.flush() # important
+        if cont == len(image_names):
+            sys.stdout.write('\r' + "Le immagini elaborate sono attualmente : " + str(cont) + "/" + str(len(image_names)))
+            sys.stdout.flush() # important
         nomeFile = os.path.splitext(filename)[0]
         feature = fe.extract(img=Image.open(f"gallery/{nomeFile}.jpg"))
         feature_path = f"features/{nomeFile}.npy"
