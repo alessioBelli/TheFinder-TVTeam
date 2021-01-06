@@ -7,3 +7,4 @@ avente un browser. Inoltre, non sarà richiesto all'utente di scaricare nessun f
 
 La nostra web app è composta da 4 pagine:nindex.html, results.html, gallery.html e upload.html
 
+Se si vuole
