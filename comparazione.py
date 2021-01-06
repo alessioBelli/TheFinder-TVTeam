@@ -63,23 +63,21 @@ def istogrammi(input):
 def compara(input,num):
 
     first_n = istogrammi(input)
-    ids,new = query.compara(input)
+    result = query.compara(input)
 
     list_image = os.listdir("./gallery")
     n = len(list_image)
-
     res = []
     for x in range(n):
-
-        for i in ids:
-            if str(i) == first_n[x][0]:
+        for elem in result:
+            if elem[0] == first_n[x][0]:
+                media = ((first_n[x][1]*100)*0.25 + (elem[1])*0.75) / 1
+                res.append((elem[0],media))
                 
-                media = ((first_n[x][1]*100)*0.25 + (new[i])*0.75) / 1
-                res.append((i,media))
-    print(res)
+    #print(res)
     
     res.sort(key=takeSecond, reverse=True)
-    print("Sorted",res)
+    #print("Sorted",res)
 
     count2=0
     filenames = "["

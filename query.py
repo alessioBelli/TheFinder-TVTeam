@@ -34,9 +34,6 @@ def compara(input):
     #calcolo la distanza euclidea fra la feature della query e le 1000 salvate
     dists = np.linalg.norm(features - query, axis=1)   #np.linalg.norm formula per distanza eucl
     ids = np.argsort(dists)   #argsort è funzione che ordina in ordine crescente e ritorna gli indici(corrispondenti all'id dell'immagine)
-
-
-
     #creo nuovo array per definire punteggio da 0 a 100
     #-------------------------------------------------------------------
     arr2=np.sort(dists)                    #in arr2 ho i valori ordinati in ordine crescente
@@ -56,4 +53,9 @@ def compara(input):
         new.append(100-(((n - oldMin) * NewRange) / OldRange) + newMin) #formula per passare da vecchio range a nuovo range(100- per invertire l'ordine (sennò avrei che i più simili sono quelli più vicini allo 0)                                                                  
     #--------------------------------------------------------------------
 
-    return ids, new
+
+    result = []
+    for i in ids:
+        nomeFile = os.path.splitext(image_names[i])[0]
+        result.append((nomeFile, new[i]))
+    return result
