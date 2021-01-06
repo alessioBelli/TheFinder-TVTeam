@@ -144,4 +144,4 @@ if __name__ == "__main__":
     #save_feature.creazioneFeature()
     app.secret_key = 'super secret key'
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-    app.run(port=4555, debug=True)
+    app.run(port=4555, debug=True, use_reloader=False)
