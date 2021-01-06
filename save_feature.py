@@ -28,3 +28,8 @@ def creazioneFeature():
         feature = fe.extract(img=Image.open(f"gallery/{nomeFile}.jpg"))
         feature_path = f"features/{nomeFile}.npy"
         np.save(feature_path, feature)
+
+
+
+if __name__ == "__main__":
+    creazioneFeature()
