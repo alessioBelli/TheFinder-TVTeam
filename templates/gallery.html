@@ -45,7 +45,7 @@
   
             <div class="w3-row-padding">
                 {% for image_name in image_names %}
-                <div class="w3-third w3-container w3-margin-bottom" style="text-align:center">
+                <div class="w3-third w3-container w3-margin-bottom" style="text-align:center; min-width: 350px;">
                     <img src="{{url_for('send_image', filename=image_name)}}" alt="image gallery" style="height: 220px;" class="w3-hover-opacity w3-animate-right" onclick="onClick(this)"">
                     <div class="w3-container w3-white">
                         
