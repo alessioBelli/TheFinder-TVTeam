@@ -4,13 +4,17 @@ import os.path
 from os import path
 import math
 
-
+#Funzione per creare 4 istogrammi per ogni immagine del dataset
 def saveHisto():
     fsWrite = cv2.FileStorage("histograms.txt", cv2.FileStorage_WRITE )
+
+    #Controllo presenza file non voluto e eliminazione nel caso in cui sia presente
     if path.exists("gallery/.DS_Store"):
         os.remove("gallery/.DS_Store")
+    
     image_names = os.listdir("gallery/")
 
+    #Per ogni immagine nel nostro dataset, calcolo dei 4 istogrammi e salvataggio sul file histograms.txt
     for filename in image_names:
         nomeFile = os.path.splitext(filename)[0]
         image=cv2.imread(f"gallery/{filename}")
@@ -31,6 +35,6 @@ def saveHisto():
             countr+=1
             countc=0
 
-    print("Salvataggio eseguito")
+    print("Salvataggio degli istogrammi eseguito correttamente")
     fsWrite.release()
 
