@@ -59,7 +59,7 @@
             <div class="w3-row-padding">
                 {% for image_name in dati %}
         
-            <div class="w3-third w3-container w3-margin-bottom" style="text-align:center;">
+            <div class="w3-third w3-container w3-margin-bottom" style="text-align:center; min-width: 350px;">
             
                 
                 <img src="{{url_for('send_image_results', filename=image_name['name'])}}" alt="Immagine simile" style=" height: 220px;" class="w3-hover-opacity w3-animate-right" onclick="onClick(this)">
