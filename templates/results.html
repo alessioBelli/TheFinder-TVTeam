@@ -13,7 +13,6 @@
         <style>
             body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </style>
-        
         <script type = "text/javascript" > 
             history.pushState(null, null, location.href);
             history.back();
@@ -22,15 +21,8 @@
                 document.getElementById("alert").innerHTML = "<div class=\"alert alert-warning\" role=\"alert\">Per caricare una nuova foto, clicca sulla voce del menù \"Upload\"</div>"
                 history.go(1); }; 
         </script>​
-        
- 
     </head>
     <body class="w3-light-grey w3-content" style="max-width:1600px" onbeforeunload="HandleBackFunctionality()">
-        {% if input_image == "" %}
-            <meta http-equiv="REFRESH" content="0;url=http://127.0.0.1:4555/">
-        {% endif %}
-
-        <!-- Sidebar/menu -->
         <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
             <div class="w3-container">
                 <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
@@ -38,7 +30,7 @@
                 </a>
                 <h4><b>THE FINDER  </b><i class='fas fa-search w3-spin'></i></h4><br>
                 <b>L'immagine che hai caricato:</b>
-                <img src="{{url_for('send_image_results', filename=input_image)}}" style="width:100%;" class="w3-round w3-animate-left">
+                <img src="{{url_for('send_image_results', filename=input_image)}}" alt="immagine input" style="width:100%;" class="w3-round w3-animate-left">
                 
             </div>
             <div class="w3-bar-block">
@@ -67,10 +59,10 @@
             <div class="w3-row-padding">
                 {% for image_name in dati %}
         
-            <div class="w3-third w3-container w3-margin-bottom" style="text-align:center;">
+            <div class="w3-third w3-container w3-margin-bottom" style="text-align:center; min-width: 350px;">
             
                 
-                <img src="{{url_for('send_image_results', filename=image_name['name'])}}" alt="Norway" style=" height: 220px;" class="w3-hover-opacity w3-animate-right" onclick="onClick(this)">
+                <img src="{{url_for('send_image_results', filename=image_name['name'])}}" alt="Immagine simile" style=" height: 220px;" class="w3-hover-opacity w3-animate-right" onclick="onClick(this)">
                 
                 <div class="w3-container w3-white">
                     <p><b>{{image_name['name']}}</b></p>

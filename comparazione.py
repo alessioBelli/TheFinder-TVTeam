@@ -1,4 +1,3 @@
-# import the necessary packages
 import math
 import cv2
 import os
@@ -59,28 +58,35 @@ def istogrammi(input):
     return first_n
 
         
-
+#Funzione che ritorna una stringa json contente le num immagini simili con relativa percentuale a quella di input
 def compara(input,num):
 
+    #Comparazione istogrammi tra immagine di input e immagini del dataset
     first_n = istogrammi(input)
+    print("Fine comparazione istogrammi")
+
+    #Comparazione tramite feature tra immagine di input e immagini del dataset
     result = query.compara(input)
+    print("Fine comparazione tramite feature")
 
     list_image = os.listdir("./gallery")
+
     n = len(list_image)
     res = []
+    #Creazione vettore contenente il nome delle immagini e la relativa percentuale finale calcolata tramite una media pesata
     for x in range(n):
         for elem in result:
             if elem[0] == first_n[x][0]:
                 media = ((first_n[x][1]*100)*0.25 + (elem[1])*0.75) / 1
                 res.append((elem[0],media))
-                
-    #print(res)
-    
+            
+    #Riordinamento discentente (dal maggiore al minore) del vettore appena creato sulla base del secondo parametro (percentuale)       
     res.sort(key=takeSecond, reverse=True)
-    #print("Sorted",res)
+
 
     count2=0
     filenames = "["
+    #Creazione oggetto json contenente le num immagini simili da visualizzare
     for elem in res:
         count2+=1 
         if(count2 == int(num)):

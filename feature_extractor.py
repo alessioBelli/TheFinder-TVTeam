@@ -3,7 +3,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
 
-# See https://keras.io/api/applications/ for details
+
 
 class FeatureExtractor:
     def __init__(self):                              #costruttore per la classe
