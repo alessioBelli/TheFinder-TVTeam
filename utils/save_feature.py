@@ -1,4 +1,4 @@
-from feature_extractor import FeatureExtractor
+from utils.feature_extractor import FeatureExtractor
 from pathlib import Path
 from PIL import Image
 import numpy as np

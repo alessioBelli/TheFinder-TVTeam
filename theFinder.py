@@ -1,12 +1,14 @@
 import os
 from flask import Flask, request, render_template, send_from_directory
 from flask import Flask, session, request, redirect, url_for
-import comparazione
-import saveHisto
+
+from utils import saveHisto
+from utils import save_feature
+from utils import comparazione
 import string
 import random
 import json
-import save_feature
+
 
 __author__ = 'TV Team'
 
@@ -84,6 +86,7 @@ def add_header(r):
 @app.route('/gallery')
 def get_gallery():
     image_names = os.listdir('./gallery')
+    random.shuffle(image_names)
     return render_template("gallery.html", image_names=image_names)
 
 #Funzione che invia dal server al client le immagini della gallery

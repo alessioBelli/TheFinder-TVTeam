@@ -1,7 +1,7 @@
 
 # Import the libraries
 import numpy as np
-from feature_extractor import FeatureExtractor 
+from utils.feature_extractor import FeatureExtractor 
 from PIL import Image
 import cv2
 import os
