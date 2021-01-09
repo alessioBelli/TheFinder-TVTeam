@@ -11,7 +11,7 @@ def takeSecond(elem):
     return elem[1]
 
 def istogrammi(input):
-    fsRead= cv2.FileStorage ("histograms.txt", cv2.FileStorage_READ )
+    fsRead= cv2.FileStorage ("histograms.yml", cv2.FileStorage_READ )
     
     #calcola istogramma immagine input
     image=cv2.imread(f"images/"+input)
