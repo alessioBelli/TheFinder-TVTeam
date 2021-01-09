@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <style>
             body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
@@ -42,11 +43,13 @@
                     </div>
                 </div>
             </header>
-  
+            <div class="alert alert-info" style="text-align: center;" role="alert">
+                Queste sono alcune delle immagini presenti nel dataset
+            </div>
             <div class="w3-row-padding">
-                {% for image_name in image_names %}
+                {% for n in range(100) %}
                 <div class="w3-third w3-container w3-margin-bottom" style="text-align:center; min-width: 350px;">
-                    <img src="{{url_for('send_image', filename=image_name)}}" alt="image gallery" style="height: 220px;" class="w3-hover-opacity w3-animate-right" onclick="onClick(this)"">
+                    <img src="{{url_for('send_image', filename=image_names[n])}}" alt="image gallery" style="height: 220px;" class="w3-hover-opacity w3-animate-right" onclick="onClick(this)"">
                     <div class="w3-container w3-white">
                         
                     </div>
