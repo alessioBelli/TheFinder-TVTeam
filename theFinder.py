@@ -1,12 +1,14 @@
 import os
 from flask import Flask, request, render_template, send_from_directory
 from flask import Flask, session, request, redirect, url_for
-import comparazione
-import saveHisto
+
+from utils import saveHisto
+from utils import save_feature
+from utils import comparazione
 import string
 import random
 import json
-import save_feature
+
 
 __author__ = 'TV Team'
 

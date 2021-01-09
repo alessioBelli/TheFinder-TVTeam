@@ -6,7 +6,8 @@ import math
 
 #Funzione per creare 4 istogrammi per ogni immagine del dataset
 def saveHisto():
-    fsWrite = cv2.FileStorage("histograms.yml", cv2.FileStorage_WRITE )
+    
+    fsWrite = cv2.FileStorage("utils/histograms.yml", cv2.FileStorage_WRITE )
 
     #Controllo presenza file non voluto e eliminazione nel caso in cui sia presente
     if path.exists("gallery/.DS_Store"):

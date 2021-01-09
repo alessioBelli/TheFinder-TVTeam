@@ -3,7 +3,7 @@ import cv2
 import os
 import os.path
 from os import path
-import query
+from utils import query
 
 
 # take second element for sort
@@ -11,7 +11,7 @@ def takeSecond(elem):
     return elem[1]
 
 def istogrammi(input):
-    fsRead= cv2.FileStorage ("histograms.yml", cv2.FileStorage_READ )
+    fsRead= cv2.FileStorage ("utils/histograms.yml", cv2.FileStorage_READ )
     
     #calcola istogramma immagine input
     image=cv2.imread(f"images/"+input)
