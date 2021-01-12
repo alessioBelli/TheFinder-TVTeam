@@ -105,7 +105,8 @@ def elaborazioneImmagini():
     #Approssimazione della percentuale ad una cifra decimale
     for elem in dati:
         elem["percentage"] = '%.1f'%(float(elem["percentage"]))
-    
+        elem["percentage_histo"] = '%.1f'%(float(elem["percentage_histo"]))
+        elem["percentage_features"] = '%.1f'%(float(elem["percentage_features"]))
     return dati
 
 #Visualizzazione della pagina con le immagini simili dopo la comparazione
