@@ -3,6 +3,7 @@ import cv2
 import os
 import os.path
 from os import path
+import numpy as np
 from utils import query
 
 
@@ -49,24 +50,43 @@ def istogrammi(input):
         media=compare/4																			#calcola la media  
         results[nomeFile]=media																	#salva la media relativa 
 
+    #ids = np.argsort(results)   #argsort è funzione che ordina in ordine crescente e ritorna gli indici(corrispondenti all'id dell'immagine)
+    d=list(results.values())
+    
+    #creo nuovo array per definire punteggio da 0 a 100
+    #-------------------------------------------------------------------
+    ids=np.argsort(d)
+    arr2=np.sort(d)                    #in arr2 ho i valori ordinati in ordine crescente
 
-    newdict2={k:v for k, v in sorted(results.items(),reverse=True,key=lambda key:key[1])}
-    list_image = os.listdir("./gallery")														
-    n = len(list_image)
-    first_n = list(newdict2.items())[:n]
+    oldMax=arr2[len(arr2)-1]              
+    oldMin=arr2[0]                    
+    newMax=arr2[len(arr2)-1]                            #nuovo punteggio massimo
+    newMin=0                              #nuovo minimo
 
-    return first_n
+    OldRange = (oldMax-oldMin)            #vecchio range
+    NewRange = (newMax-newMin)            #nuovo range
+    new=[]
+    for n in d:
+        new.append((((n - oldMin) * NewRange) / OldRange) + newMin) #formula per passare da vecchio range a nuovo range(100- per invertire l'ordine (sennò avrei che i più simili sono quelli più vicini allo 0)                                                                  
+    #--------------------------------------------------------------------
+    
+    result_histograms = []
+    #Creazione oggetto contente associazione tra nomi e percentuali
+    for i in ids:
+        nomeFile = os.path.splitext(image_names[i])[0]
+        result_histograms.append((nomeFile, new[i]))
+
+    return result_histograms
 
         
 #Funzione che ritorna una stringa json contente le num immagini simili con relativa percentuale a quella di input
 def compara(input,num):
 
     #Comparazione istogrammi tra immagine di input e immagini del dataset
-    first_n = istogrammi(input)
+    result_histograms = istogrammi(input)
     print("Fine comparazione istogrammi")
-
     #Comparazione tramite feature tra immagine di input e immagini del dataset
-    result = query.compara(input)
+    result_features = query.compara(input)
     print("Fine comparazione tramite feature")
 
     list_image = os.listdir("./gallery")
@@ -75,10 +95,11 @@ def compara(input,num):
     res = []
     #Creazione vettore contenente il nome delle immagini e la relativa percentuale finale calcolata tramite una media pesata
     for x in range(n):
-        for elem in result:
-            if elem[0] == first_n[x][0]:	
-                media = ((first_n[x][1]*100)*0.25 + (elem[1])*0.75) / 1								# 25% peso istogrammi  75% features
-                res.append((elem[0],media))
+        for elem in result_features:
+            if elem[0] == result_histograms[x][0]:	                                                        #se nome file del risultato feature è uguale a nome file risultato istogramma
+                
+                media = ((result_histograms[x][1])*0.25*100 + (elem[1])*0.75) / 1								# 25% peso istogrammi  75% features
+                res.append((elem[0],media, result_histograms[x][1]*100, elem[1] ))
             
     #Riordinamento discentente (dal maggiore al minore) del vettore appena creato sulla base del secondo parametro (percentuale)       
     res.sort(key=takeSecond, reverse=True)
@@ -90,14 +111,13 @@ def compara(input,num):
     for elem in res:
         count2+=1 
         if(count2 == int(num)):
-            filenames = filenames + '{ "name": "' + f"{elem[0]}.jpg" + '", "percentage": ' + ("%.3f" % (elem[1])) + '}'
+            filenames = filenames + '{ "name": "' + f"{elem[0]}.jpg" + '", "percentage": "' + ("%.3f" % (elem[1])) + '", "percentage_histo": "' + ("%.3f" % (elem[2])) + '", "percentage_features": "' + ("%.3f" % (elem[3])) + '"}'
             break
         else:
-            filenames = filenames + '{ "name": "' + f"{elem[0]}.jpg" + '", "percentage": ' + ("%.3f" % (elem[1])) + '},'
+            filenames = filenames + '{ "name": "' + f"{elem[0]}.jpg" + '", "percentage": "' + ("%.3f" % (elem[1])) + '", "percentage_histo": "' + ("%.3f" % (elem[2])) + '", "percentage_features": "' + ("%.3f" % (elem[3])) + '"},'
 
     filenames = filenames + "]"
 
-    
     return filenames
 
 
