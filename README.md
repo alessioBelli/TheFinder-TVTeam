@@ -8,7 +8,7 @@ avente un browser. Inoltre, non sarà richiesto all'utente di scaricare nessun f
 La nostra web app è composta da 4 pagine: index.html, results.html, gallery.html e upload.html
 
 ## Istruzioni
-Per utilizzare l'applicazione è necessario avere installato python sul proprio terminale. Inoltre è necessario installare
+Per testare l'applicazione (creando un server localmente nella propria macchina) è necessario avere installato python sul proprio terminale. Inoltre è necessario installare
 le seguenti librerie che non sono comprese nella libreria standard di Python.
 - tensorflow
 - flask
@@ -16,7 +16,8 @@ le seguenti librerie che non sono comprese nella libreria standard di Python.
 - numpy
 - pillow
 
-Per installare le librerie è sufficiente eseguire sul proprio terminale il comando `pip install -r requirements.txt`.
+Dopo aver scaricato lo zip da GitHub e averlo decompresso, per installare le librerie è sufficiente eseguire sul proprio terminale il comando `pip install -r requirements.txt`dopo essersi posizionati al percorso della cartella decompressa.
+
 Qualora non si volessero installare le librerie direttamente sul proprio terminale c'è la possibilità di creare un ambiente 
 virtuale, ossia uno spazio indipendente dal resto del sistema in cui è possibile testare e lavorare con Python e pip.
 
