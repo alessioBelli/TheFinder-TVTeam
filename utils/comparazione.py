@@ -113,7 +113,7 @@ def compara(input,num):
             
             #creo oggetto in formato JSON contenente nomefile, percentuale pesata, percentuale isto, percentuale features
             filenames = filenames + '{ "name": "' + f"{elem[0]}.jpg" + '", "percentage": "' + ("%.3f" % (elem[1])) + '", "percentage_histo": "' + ("%.3f" % (elem[2])) + '", "percentage_features": "' + ("%.3f" % (elem[3])) + '"}'
-            break                    #esco dal for perchè raggiunto ho tutti i dati da passare in JSON.
+            break                    #esco dal for perchè hp raggiunto il numero di dati da passare in JSON
        
         else:                        #aggiungo virgola finchè ci sono altre stringhe da scrivere                    
             filenames = filenames + '{ "name": "' + f"{elem[0]}.jpg" + '", "percentage": "' + ("%.3f" % (elem[1])) + '", "percentage_histo": "' + ("%.3f" % (elem[2])) + '", "percentage_features": "' + ("%.3f" % (elem[3])) + '"},'
