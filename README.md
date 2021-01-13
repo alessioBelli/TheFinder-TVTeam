@@ -11,7 +11,8 @@ La nostra web app è composta da 4 pagine: index.html, results.html, gallery.htm
 Per i dettagli si rimanda al report completo: link report.pdf
 
 ## Istruzioni
-Per testare l'applicazione (creando un server localmente nella propria macchina) è necessario avere installato python sul proprio terminale. Inoltre è necessario installare
+Per testare l'applicazione (creando un server localmente nella propria macchina) è necessario avere installato python sul proprio terminale. 
+Inoltre è necessario installare
 le seguenti librerie che non sono comprese nella libreria standard di Python.
 - tensorflow
 - flask
@@ -19,12 +20,15 @@ le seguenti librerie che non sono comprese nella libreria standard di Python.
 - numpy
 - pillow
 
-NB: Per poter installare le librerie, è stato riscontrato su Windows che potrebbe essere necessario aver abilitato l'opzione "Removing the MAX_PATH Limitation" contestualmente all'installazione di Python. Per maggiori dettagli: https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation
+NB: Per poter installare la libreria TensorFlow, è stato riscontrato su Windows che potrebbe essere necessario aver abilitato l'opzione "Removing the MAX_PATH Limitation" contestualmente all'installazione di Python. Per maggiori dettagli: https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation
 
 Dopo aver scaricato lo zip da GitHub e averlo decompresso, per installare le librerie è sufficiente eseguire sul proprio terminale il comando `pip install -r requirements.txt` dopo essersi posizionati al percorso della cartella decompressa.
 
 Infine, per eseguire l'applicativo da terminale, bisogna digitare il comando `python3 theFinder.py`. 
 Una volta fatta partire l'applicazione, è possibile accedervi semplicemente usando un browser, mediante l'indirizzo `localhost:4555`.
+
+Nota: Al primo avvio assoluto dell'applicazione, verrà scaricato e salvato localmente in maniera automatica un pacchetto di circa 90 MB contenente i parametri pre-addestrati dell'algoritmo di Deep Learning 
+
 
 ### Come creare un ambiente virtuale
 Qualora non si volessero installare le librerie direttamente sul proprio terminale c'è la possibilità di creare un ambiente 
@@ -50,7 +54,8 @@ Dopo aver attivato l'ambiente virtuale, digitando il comando `pip install -r req
 
 ### Accedere al server da un altro dispositivo nella stessa rete
 Se si volesse avviare il server in una macchina e accedere all'applicazione da un dispositivo qualsiasi **collegato alla stessa rete**, è necessaria una modifica al codice:
-all'ultima riga del file theFinder.py, modificare
+all'ultima riga del file theFinder.py, 
+modificare
 ```
 app.run(port=4555, debug=True, use_reloader=False)
 ```
