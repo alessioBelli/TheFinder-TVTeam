@@ -47,3 +47,18 @@ $ . venv/bin/activate
 Windows: `> venv\Scripts\activate`
 
 Dopo aver attivato l'ambiente virtuale, digitando il comando `pip install -r requirements.txt` vengono installate le librerie necessarie.
+
+### Accedere al server da un altro dispositivo nella stessa rete
+Se si volesse avviare il server in una macchina e accedere all'applicazione da un dispositivo qualsiasi **collegato alla stessa rete**, è necessaria una modifica al codice:
+all'ultima riga del file theFinder.py, modificare
+```
+app.run(port=4555, debug=True, use_reloader=False)
+```
+con 
+
+```
+app.run(host="0.0.0.0", port=4555, debug=True, use_reloader=False)
+```
+
+Successivamente, dopo aver lanciato l'applicativo nella macchina server, prendere nota dell'indirizzo IP di quest'ultima.
+Per collegarsi da un altro dispositivo, sarà sufficiente usare un browser, mediante l'indirizzo `indirizzoip_server:4555`. 
