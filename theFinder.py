@@ -1,7 +1,6 @@
 import os
 from flask import Flask, request, render_template, send_from_directory
 from flask import Flask, session, request, redirect, url_for
-
 from utils import saveHisto
 from utils import save_feature
 from utils import comparazione
@@ -105,7 +104,8 @@ def elaborazioneImmagini():
     #Approssimazione della percentuale ad una cifra decimale
     for elem in dati:
         elem["percentage"] = '%.1f'%(float(elem["percentage"]))
-    
+        elem["percentage_histo"] = '%.1f'%(float(elem["percentage_histo"]))
+        elem["percentage_features"] = '%.1f'%(float(elem["percentage_features"]))
     return dati
 
 #Visualizzazione della pagina con le immagini simili dopo la comparazione
@@ -138,7 +138,9 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 #Funzioni richiamate al momento della creazione del Server
 if __name__ == "__main__":
     saveHisto.saveHisto()
-    #save_feature.creazioneFeature()
+     #solo se non esiste la cartella feature o se il numero di file in gallery è diverso dal numero di file in features, chiamo la funzione per il salvataggio di feature
+    if os.path.isdir("./features") == False or len(os.listdir("./gallery"))!=len(os.listdir("./features")):
+        save_feature.creazioneFeature()
     app.secret_key = 'super secret key'
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
     app.run(port=4555, debug=True, use_reloader=False)
