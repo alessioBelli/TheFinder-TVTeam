@@ -27,7 +27,8 @@ Dopo aver scaricato lo zip da GitHub e averlo decompresso, per installare le lib
 Infine, per eseguire l'applicativo da terminale, bisogna digitare il comando `python3 theFinder.py`. 
 Una volta fatta partire l'applicazione, è possibile accedervi semplicemente usando un browser, mediante l'indirizzo `localhost:4555`.
 
-Nota: Al primo avvio assoluto dell'applicazione, verrà scaricato e salvato localmente in maniera automatica un pacchetto di circa 90 MB contenente i parametri pre-addestrati dell'algoritmo di Deep Learning 
+Nota: Al primo avvio assoluto dell'applicazione, verrà scaricato e salvato localmente in maniera automatica un pacchetto di circa 90 MB contenente i parametri pre-addestrati dell'algoritmo ResNet50.
+Per quanto riguarda le feature del dataset di immagini, esse sono già presenti nello zip. Se si volesse ricalcolarle, basta eliminare la cartella "features" oppure aggiungere/rimuovere immagini alla cartella "gallery". Al primo avvio dell'applicazione dopo un'aggiunta o una modifica di features saranno necessari alcuni minuti per il ricalcolo e il salvataggio.
 
 
 ### Come creare un ambiente virtuale
