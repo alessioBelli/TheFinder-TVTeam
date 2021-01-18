@@ -8,7 +8,7 @@ avente un browser. Inoltre, non sarà richiesto all'utente di scaricare nessun f
 La nostra web app è composta da 4 pagine: index.html, results.html, gallery.html e upload.html
 
 
-Per i dettagli si rimanda al report completo: link report.pdf
+Per i dettagli si rimanda al report completo: [Report finale](./documentation/Report The Finder - TVTeam.pdf)
 
 ## Istruzioni
 Per testare l'applicazione (creando un server localmente nella propria macchina) è necessario avere installato python sul proprio terminale. 
